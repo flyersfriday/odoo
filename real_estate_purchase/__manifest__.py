@@ -26,6 +26,7 @@
     "category": "Custom",
     "author": "Created by Flyers Friday",
     "license": "LGPL-3",
+    'images': ['static/description/banner.jpg'],
     "depends": ["base", "product", "stock", "account", "purchase"],
     "data": [
         "data/sequence.xml",
