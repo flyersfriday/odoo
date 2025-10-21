@@ -22,9 +22,9 @@
 {
     "name": "Real Estate Purchase",
     "version": "1.0.0",
-    "summary": "Create POs from Real Estate records; map lines to purchase.order",
+    "summary": "Create POs from Real Estate records - map lines to purchase.order",
     "category": "Custom",
-    "author": "Created by Flyers Friday",
+    "author": "Flyers Friday",
     "license": "LGPL-3",
     'images': ['static/description/banner.jpg'],
     "depends": ["base", "product", "stock", "account", "purchase"],
