@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_real_estate_shipping_method_tree" model="ir.ui.view">
+        <field name="name">rs.shipping.method.tree</field>
+        <field name="model">rs.shipping.method</field>
+        <field name="arch" type="xml">
+            <tree string="Real Estate">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_real_estate_sp_form" model="ir.ui.view">
+        <field name="name">rs.shipping.method.form</field>
+        <field name="model">rs.shipping.method</field>
+        <field name="arch" type="xml">
+            <form string="Real Estate">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View - Shipping Method -->
+    <record id="view_search_shipping_method_rs" model="ir.ui.view">
+        <field name="name">rs.shipping.method.search</field>
+        <field name="model">rs.shipping.method</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <filter string="Active" name="active_filter" domain="[('active', '=', True)]"/>
+                <filter string="In Active" name="group_by_in_active" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_real_estate_shipping_method" model="ir.actions.act_window">
+        <field name="name">Shipping Method</field>
+        <field name="res_model">rs.shipping.method</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_search_shipping_method_rs"/>
+    </record>
+
+    <!-- Inherit the product action to show only real estate products -->
+    <record id="action_product_real_estate" model="ir.actions.act_window">
+        <field name="name">Real Estate Products</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_real_estate', '=', True)]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <!--    Customer-->
+    <record id="action_real_estate_customers" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('customer_rank', '>', 0)]</field>
+        <field name="context">{'default_customer_rank': 1}</field>
+    </record>
+
+        <!--   Vendor-->
+    <record id="action_real_estate_vendors" model="ir.actions.act_window">
+        <field name="name">Vendors</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('supplier_rank', '>', 0)]</field>
+        <field name="context">{'default_supplier_rank': 1}</field>
+    </record>
+
+</odoo>

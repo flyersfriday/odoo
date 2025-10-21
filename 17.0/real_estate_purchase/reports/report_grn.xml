@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_grn_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="picking">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Header -->
+                        <h2 style="text-align:center; margin-bottom:10px;">GOODS RECEIPT NOTE</h2>
+
+                        <!-- GRN Info Table -->
+                        <table class="table table-sm" style="width:100%; margin-top:5px; border-collapse: collapse;">
+                            <tr>
+                                <td><strong>GRN Number:</strong> <t t-esc="picking.grn_number"/></td>
+                                <td><strong>Date of Receipt:</strong> <t t-esc="picking.date_of_receipt"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>PO Number:</strong> <t t-esc="picking.po_number"/></td>
+                                <td><strong>Invoice Number:</strong> <t t-esc="picking.invoice_id.name"/></td>
+                            </tr>
+                        </table>
+
+                        <!-- Supplier / Buyer Table -->
+                        <table class="table table-sm table-bordered" style="width:100%; margin-top:10px; border-collapse: collapse;">
+                            <tr>
+                                <th style="width:50%; text-align:center;">Supplier Details</th>
+                                <th style="width:50%; text-align:center;">Buyer Details</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <t t-if="picking.supplier_id">
+                                        <strong><t t-esc="picking.supplier_id.name"/></strong><br/>
+                                        <t t-esc="picking.supplier_id.contact_address"/><br/>
+                                        <t t-if="picking.supplier_id.phone">Phone: <t t-esc="picking.supplier_id.phone"/></t><br/>
+                                        <t t-if="picking.supplier_id.email">Email: <t t-esc="picking.supplier_id.email"/></t><br/>
+                                        <t t-if="picking.supplier_id.vat">TAX ID: <t t-esc="picking.supplier_id.vat"/></t>
+                                    </t>
+                                </td>
+                                <td>
+                                    <t t-if="picking.partner_id">
+                                        <strong><t t-esc="picking.partner_id.name"/></strong><br/>
+                                        <t t-esc="picking.partner_id.contact_address"/><br/>
+                                        <t t-if="picking.partner_id.phone">Phone: <t t-esc="picking.partner_id.phone"/></t><br/>
+                                        <t t-if="picking.partner_id.email">Email: <t t-esc="picking.partner_id.email"/></t><br/>
+                                        <t t-if="picking.partner_id.vat">TAX ID: <t t-esc="picking.partner_id.vat"/></t>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Products Table -->
+                        <h3 style="margin-top:15px; margin-bottom:5px;">Products</h3>
+                        <table class="table table-sm table-bordered" style="width:100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background-color:#f2f2f2;">
+                                    <th style="border:1px solid #000;">Product</th>
+                                    <th style="border:1px solid #000;">Batch Number</th>
+                                    <th style="border:1px solid #000;">Condition</th>
+                                    <th style="border:1px solid #000;">Qty Ordered</th>
+                                    <th style="border:1px solid #000;">Qty Received</th>
+                                    <th style="border:1px solid #000;">Qty Rejected</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="picking.move_ids_without_package" t-as="line">
+                                    <tr>
+                                        <td style="border:1px solid #000;"><t t-esc="line.product_id.display_name"/></td>
+                                        <td style="border:1px solid #000;"><t t-esc="line.batch_number or ''"/></td>
+                                        <td style="border:1px solid #000;"><t t-esc="line.condition or ''"/></td>
+                                        <td style="border:1px solid #000;"><t t-esc="line.product_uom_qty"/></td>
+                                        <td style="border:1px solid #000;"><t t-esc="line.quantity"/></td>
+                                        <td style="border:1px solid #000;"><t t-esc="line.qty_rejected or 0"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Receiving Location -->
+                        <div style="margin-top:10px;">
+                            <strong>Receiving Location:</strong>
+                            <t t-esc="picking.location_dest_id.display_name"/>
+                        </div>
+
+                        <!-- Transportation Details -->
+                        <h3 style="margin-top:15px; margin-bottom:5px;">Transportation Details</h3>
+                        <table class="table table-sm table-bordered" style="width:100%; border-collapse: collapse;">
+                            <tr>
+                                <td><strong>Mode:</strong> <t t-esc="picking.transport_mode"/></td>
+                                <td><strong>Vehicle:</strong> <t t-esc="picking.vehicle_number"/></td>
+                                <td><strong>Driver:</strong> <t t-esc="picking.driver_name"/></td>
+                                <td><strong>Company:</strong> <t t-esc="picking.transport_company"/></td>
+                            </tr>
+                        </table>
+
+                        <!-- Signature Section -->
+                        <table class="table table-sm table-bordered" style="width:100%; margin-top:30px; border-collapse: collapse;">
+                            <tr>
+                                <td style="height:80px; vertical-align:bottom; text-align:center;">
+                                    <strong>Received &amp; Inspected By</strong><br/>
+                                    <t t-esc="picking.received_by.name"/>
+                                </td>
+                                <td style="height:80px; vertical-align:bottom; text-align:center;">
+                                    <strong>Supplier Representative</strong><br/>
+                                    <t t-esc="picking.supplier_representative.name"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_purchase_order_real_estate" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//div[@class='page']" position="replace">
+            <div class="page">
+                <h2 style="text-align:center;">Purchase Order</h2>
+                <table class="table table-sm" style="width:100%; margin-bottom:20px;">
+                    <tr>
+                        <td><strong>PO Number:</strong></td>
+                        <td><span t-field="o.name"/></td>
+                        <td><strong>Date:</strong></td>
+                        <td><span t-field="o.date_order" t-options='{"widget": "date"}'/></td>
+                    </tr>
+                </table>
+                <table class="table table-sm" style="width:100%; margin-bottom:20px;">
+                    <tr>
+                        <td><strong>Buyer:</strong>
+                            <div t-field="o.partner_id"/>
+                            <div t-field="o.partner_id.street"/>
+                            <div><t t-esc="o.partner_id.city"/> <t t-esc="o.partner_id.state_id.name"/> <t t-esc="o.partner_id.zip"/></div>
+                            <div t-field="o.partner_id.country_id"/>
+                            <div>Phone: <t t-esc="o.partner_id.phone"/></div>
+                            <div>Email: <t t-esc="o.partner_id.email"/></div>
+                        </td>
+                        <td><strong>Seller:</strong>
+                            <div t-field="o.seller_id"/>
+                            <div t-field="o.seller_id.street"/>
+                            <div t-field="o.seller_id.street2"/>
+                            <div><t t-esc="o.seller_id.city"/> <t t-esc="o.seller_id.state_id.name"/> <t t-esc="o.company_id.zip"/></div>
+                            <div t-field="o.seller_id.country_id"/>
+                            <div>Phone: <t t-esc="o.seller_id.phone"/></div>
+                            <div>Email: <t t-esc="o.seller_id.email"/></div>
+                        </td>
+                    </tr>
+                </table>
+                <h3>Item Description:</h3>
+                <table class="table table-sm table-bordered" style="width:100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th>SKU</th>
+                            <th>Name</th>
+                            <th>Qty</th>
+                            <th>Unit Price</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="o.order_line" t-as="line">
+                            <td><span t-field="line.product_id.default_code"/></td>
+                            <td><span t-field="line.product_id.name"/></td>
+                            <td><span t-field="line.product_qty"/></td>
+                            <td>
+                                <span t-field="line.price_unit"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                            <td>
+                                <span t-field="line.price_total"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Totals Section -->
+                <table class="table table-sm" style="width: 40%; float: right; margin-top: 10px;">
+                    <tr>
+                        <td><strong>Subtotal :</strong></td>
+                        <td class="text-end">
+                            <span t-field="o.amount_untaxed"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Sales Tax <t t-esc="o.get_tax_name()"/></strong></td>
+                        <td class="text-end">
+                            <span t-field="o.amount_tax"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Grand Total :</strong></td>
+                        <td class="text-end">
+                            <span t-field="o.amount_total"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <h3>Shipping Details:</h3>
+                <table class="table table-sm" style="width:100%; margin-bottom:20px;">
+                    <tr>
+                        <td><strong>Shipping Date:</strong></td>
+                        <td><strong>Shipping Method:</strong></td>
+                    </tr>
+                    <tr>
+                        <td><span t-esc="o.real_estate_id.shipping_date"/></td>
+                        <td><span t-esc="o.real_estate_id.shipping_method_id.name"/></td>
+                    </tr>
+                </table>
+            </div>
+        </xpath>
+    </template>
+</odoo>

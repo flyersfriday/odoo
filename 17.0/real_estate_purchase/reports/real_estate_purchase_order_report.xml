@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <report
+        id="action_report_purchase_order_real_estate"
+        model="purchase.order"
+        string="Purchase Order (Real Estate)"
+        report_type="qweb-pdf"
+        name="real_estate_purchase_order.report_purchase_order_real_estate"
+        file="real_estate_purchase_order.report_purchase_order_real_estate"
+        print_report_name="'PO_%s' % (object.name)"
+    />
+
+    <record id="action_report_grn" model="ir.actions.report">
+        <field name="name">Goods Receipt Note</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">real_estate_purchase.report_grn_document</field>
+        <field name="report_file">real_estate_purchase.report_grn_document</field>
+        <field name="print_report_name">'GRN_' + (object.grn_number or object.name)</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

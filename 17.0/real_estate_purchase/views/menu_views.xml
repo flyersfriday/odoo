@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--    Main Menus -->
+    <menuitem id="menu_real_estate_root" name="Real Estate" sequence="10"/>
+
+    <menuitem id="menu_real_estate"
+              name="Real Estate"
+              parent="menu_real_estate_root"
+              action="action_real_estate"
+              sequence="1"/>
+
+    <!--   Purchase Order-->
+    <menuitem
+        id="menu_real_estate_po_sub"
+        name="Purchase Order"
+        parent="real_estate_purchase.menu_real_estate_root"
+        action="purchase.purchase_form_action"
+        sequence="2"/>
+
+    <!--    GRN -->
+    <menuitem
+        id="menu_real_estate_grn_sub"
+        name="GRN"
+        parent="real_estate_purchase.menu_real_estate_root"
+        action="stock.action_picking_tree_all"
+        sequence="3"/>
+
+    <!--   Invoices -->
+    <menuitem
+        id="menu_real_estate_invoice_sub"
+        name="Invoices"
+        parent="real_estate_purchase.menu_real_estate_root"
+        action="account.action_move_in_invoice_type"
+        sequence="4"/>
+
+    <menuitem id="menu_real_estate_master"
+              name="Configuration"
+              parent="menu_real_estate_root"
+              sequence="5"/>
+
+    <!--    Customers -->
+    <menuitem
+        id="menu_real_estate_customer_sub"
+        name="Customers"
+        parent="real_estate_purchase.menu_real_estate_master"
+        action="action_real_estate_customers"
+        sequence="1"/>
+
+    <!--    Vendors -->
+    <menuitem
+        id="menu_real_estate_vendor_sub"
+        name="Vendors"
+        parent="real_estate_purchase.menu_real_estate_master"
+        action="action_real_estate_vendors"
+        sequence="2"/>
+
+    <!-- Add Products Menu under Real Estate Menu -->
+    <menuitem
+        id="menu_real_estate_product"
+        name="Products"
+        parent="real_estate_purchase.menu_real_estate_master"
+        action="action_product_real_estate"
+        sequence="3"
+    />
+
+    <!--    Taxes -->
+    <menuitem
+        id="menu_real_estate_taxes_sub"
+        name="Taxes"
+        parent="real_estate_purchase.menu_real_estate_master"
+        action="account.action_tax_form"
+        sequence="4"/>
+
+    <menuitem
+        id="menu_real_estate_sm_sub"
+        name="Shipping Method"
+        parent="real_estate_purchase.menu_real_estate_master"
+        action="action_real_estate_shipping_method"
+        sequence="4"/>
+
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_picking_form_inherit_grn" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.grn</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='picking_properties']" position="after">
+                <group>
+                    <group string="GRN Information">
+                        <field name="grn_number" readonly="1"/>
+                        <field name="date_of_receipt"/>
+                        <field name="po_number" readonly="1"/>
+                        <field name="invoice_id" readonly="1"/>
+                        <field name="supplier_id" readonly="1"/>
+                        <field name="buyer_id" readonly="1"/>
+                    </group>
+
+                    <group string="Transportation Details">
+                        <field name="transport_mode"/>
+                        <field name="driver_name"/>
+                        <field name="vehicle_number"/>
+                        <field name="transport_company"/>
+                    </group>
+
+                    <group string="Inspection">
+                        <field name="received_by"/>
+                        <field name="supplier_representative"/>
+                    </group>
+                </group>
+            </xpath>
+
+            <!-- Extend Operation Lines Tree -->
+            <xpath expr="//notebook/page[@name='operations']/field[@name='move_ids_without_package']/tree" position="inside">
+                <field name="qty_rejected"/>
+                <field name="qty_received"/>
+                <field name="batch_number"/>
+                <field name="condition"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

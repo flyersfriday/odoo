@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_real_estate_user,access.real.estate.user,real_estate_purchase.model_real_estate,base.group_user,1,1,1,1
+access_real_estate_line_user,access.real.estate.line.user,real_estate_purchase.model_real_estate_line,base.group_user,1,1,1,1
+access_rs_shipping_method_user,access.rs.shipping.method,real_estate_purchase.model_rs_shipping_method,base.group_user,1,1,1,1
