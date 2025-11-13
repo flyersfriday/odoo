@@ -1,0 +1,28 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<odoo>
+    <template id="product" inherit_id="website_sale.product">
+        <xpath expr="//div[@id='o_wsale_cta_wrapper']" position="attributes">
+            <attribute name="t-attf-class">{{'remove_button' if not login_user else '' }}</attribute>
+        </xpath>
+    </template>
+
+    <template id="product_price" inherit_id="website_sale.product_price">
+        <xpath expr="//div[@itemprop='offers']" position="attributes">
+            <attribute name="t-attf-class">{{'d-none' if not login_user else '' }}</attribute>
+        </xpath>
+        <xpath expr="//div[@itemprop='offers']" position="after">
+            <t t-if="not login_user">
+                <div>
+                    <a href="/web/login" class="mb-2">
+                        <t t-if="request.env.lang == 'fr_FR'">
+                            <t t-esc="'Connectez-vous pour voir les prix'"/>
+                        </t>
+                        <t t-else="">
+                            Login to see price
+                        </t>
+                    </a>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
